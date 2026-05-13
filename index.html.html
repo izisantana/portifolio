@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio — Data, BI, AI & Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #080E1A;
+    --bg2: #0D1626;
+    --card: #111C2E;
+    --card2: #162033;
+    --border: rgba(56,189,248,0.13);
+    --text: #EDF2FF;
+    --text2: #94A3B8;
+    --text3: #64748B;
+    --accent: #38BDF8;
+    --accent2: #A78BFA;
+    --accent3: #2DD4BF;
+    --accent4: #F472B6;
+    --glow: rgba(56,189,248,0.18);
+    --glow2: rgba(167,139,250,0.14);
+    --r: 14px;
+    --font-display: 'Poppins', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --nav-h: 68px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    background: rgba(8,14,26,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 40px rgba(56,189,248,0.08); }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width .25s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+  .nav-icons a {
+    color: var(--text3);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color .2s;
+  }
+  .nav-icons a:hover { color: var(--accent); }
+
+  .lang-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 0.8px;
+    transition: all .2s;
+  }
+  .lang-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--glow);
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--text2); border-radius: 2px;
+    transition: all .3s;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--nav-h) + 40px) 5vw 80px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 70% 60% at 70% 40%, rgba(56,189,248,0.08) 0%, transparent 65%),
+                radial-gradient(ellipse 50% 50% at 20% 70%, rgba(167,139,250,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 85% 80%, rgba(45,212,191,0.05) 0%, transparent 55%);
+  }
+
+  /* Grid lines */
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, transparent 72%);
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(60px); pointer-events: none; z-index: 0;
+    animation: float 8s ease-in-out infinite;
+  }
+  .orb1 { width: 380px; height: 380px; background: rgba(56,189,248,0.06); top: 10%; right: 5%; animation-delay: 0s; }
+  .orb2 { width: 280px; height: 280px; background: rgba(167,139,250,0.07); bottom: 15%; left: 5%; animation-delay: -3s; }
+  .orb3 { width: 200px; height: 200px; background: rgba(45,212,191,0.05); top: 50%; right: 30%; animation-delay: -6s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-25px) scale(1.04); }
+  }
+
+  .hero-inner { max-width: 1100px; width: 100%; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-content { max-width: 760px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(56,189,248,0.08);
+    border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp .6s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent3);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+    animation: fadeUp .6s .1s ease both;
+  }
+  .hero-name .line2 {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text2);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp .6s .2s ease both;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    animation: fadeUp .6s .3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #080E1A;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none; border-radius: 50px;
+    cursor: pointer; text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 24px rgba(56,189,248,0.3);
+    letter-spacing: 0.2px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 32px rgba(56,189,248,0.45); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 28px;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    cursor: pointer; text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--glow); }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 100px 5vw; position: relative; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    color: var(--text2);
+    font-size: 1rem;
+    max-width: 540px;
+    font-weight: 300;
+  }
+
+  .section-header { margin-bottom: 3.5rem; }
+
+  /* divider */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--bg2); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+    font-size: 1.02rem;
+  }
+  .about-text p:first-child { font-size: 1.1rem; color: var(--text); font-weight: 400; }
+
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.8rem;
+    position: sticky; top: calc(var(--nav-h) + 20px);
+  }
+
+  .about-card-title {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-info-row {
+    display: flex; gap: 12px;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .about-info-icon {
+    width: 32px; height: 32px;
+    background: var(--glow);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .about-info-label {
+    font-size: 0.72rem;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .about-info-val {
+    font-size: 0.88rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(45,212,191,0.1);
+    border: 1px solid rgba(45,212,191,0.25);
+    border-radius: 50px;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    color: var(--accent3);
+    font-weight: 500;
+    margin-top: 1.2rem;
+  }
+  .status-badge::before { content:''; width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s ease-in-out infinite; }
+
+  /* ─── SKILLS ─── */
+  #skills {}
+
+  .skills-cats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-cat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.6rem;
+    transition: border-color .3s, transform .3s;
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .skill-cat.visible { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s; }
+  .skill-cat:hover { border-color: rgba(56,189,248,0.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(56,189,248,0.08); }
+
+  .skill-cat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .skill-cat-icon { font-size: 1rem; }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .skill-tag {
+    font-size: 0.78rem;
+    padding: 4px 11px;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    background: var(--bg);
+    font-weight: 400;
+    transition: all .2s;
+    cursor: default;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--glow); }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--bg2); }
+
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 2.5rem;
+  }
+  .filter-btn {
+    padding: 6px 18px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text3);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .2s;
+    letter-spacing: 0.3px;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--glow);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .project-card.visible { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease, border-color .3s, box-shadow .3s; }
+  .project-card:hover { transform: translateY(-6px); border-color: rgba(56,189,248,0.28); box-shadow: 0 16px 50px rgba(56,189,248,0.1); }
+  .project-card[data-hidden="true"] { display: none; }
+
+  /* ─── PAGINATION ─── */
+  .pagination {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .page-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+  }
+  .page-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--glow); }
+  .page-btn:disabled { opacity: 0.3; cursor: default; }
+  .page-indicator {
+    font-size: 0.85rem;
+    color: var(--text2);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    min-width: 60px;
+    text-align: center;
+  }
+  .page-indicator span { color: var(--accent); font-weight: 600; }
+
+  .project-thumb {
+    width: 100%; height: 168px;
+    background: var(--card2);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-thumb-icon { font-size: 3rem; opacity: .5; position: relative; z-index: 1; }
+  .project-thumb-bg {
+    position: absolute; inset: 0;
+    opacity: .15;
+  }
+
+  .project-body { padding: 1.4rem; }
+
+  .project-cat-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    margin-bottom: 0.75rem;
+  }
+  .cat-bi { background: rgba(56,189,248,0.12); color: var(--accent); }
+  .cat-ml { background: rgba(167,139,250,0.12); color: var(--accent2); }
+  .cat-ai { background: rgba(244,114,182,0.12); color: var(--accent4); }
+  .cat-sql { background: rgba(45,212,191,0.12); color: var(--accent3); }
+  .cat-py { background: rgba(251,191,36,0.12); color: #FBBF24; }
+
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.3px;
+  }
+  .project-desc {
+    font-size: 0.86rem;
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    line-height: 1.55;
+  }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.2rem; }
+  .tech-tag {
+    font-size: 0.72rem;
+    padding: 2px 9px;
+    border-radius: 4px;
+    background: var(--bg);
+    color: var(--text3);
+    border: 1px solid var(--border);
+  }
+  .project-links { display: flex; gap: 8px; }
+  .proj-btn {
+    font-size: 0.78rem;
+    padding: 7px 16px;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    background: transparent;
+    transition: all .2s;
+  }
+  .proj-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--glow); }
+  .proj-btn.primary { background: var(--glow); border-color: rgba(56,189,248,0.3); color: var(--accent); }
+
+  /* ─── EXPERIENCE ─── */
+  #experience {}
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute; top: 8px; left: 0; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.8rem;
+    opacity: 0; transform: translateX(-16px);
+  }
+  .tl-item.visible { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
+
+  .tl-dot {
+    position: absolute; left: -36px; top: 6px;
+    width: 14px; height: 14px;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(56,189,248,0.4);
+  }
+
+  .tl-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.6rem;
+    transition: border-color .3s;
+  }
+  .tl-card:hover { border-color: rgba(56,189,248,0.3); }
+
+  .tl-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 8px;
+    margin-bottom: 0.3rem;
+  }
+  .tl-role {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+  .tl-period {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 500;
+    background: var(--glow);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 3px 12px;
+    white-space: nowrap;
+  }
+  .tl-company {
+    font-size: 0.85rem;
+    color: var(--accent2);
+    font-weight: 500;
+    margin-bottom: 0.9rem;
+  }
+  .tl-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  .tl-list li {
+    font-size: 0.87rem;
+    color: var(--text2);
+    font-weight: 300;
+    padding: 2px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .tl-list li::before {
+    content: '–';
+    position: absolute; left: 0;
+    color: var(--accent3);
+  }
+  .tl-tools { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tool-tag {
+    font-size: 0.7rem;
+    padding: 2px 9px;
+    border-radius: 4px;
+    background: var(--glow2);
+    color: var(--accent2);
+    border: 1px solid rgba(167,139,250,0.15);
+  }
+
+  /* ─── EDUCATION ─── */
+  #education { background: var(--bg2); }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.4rem;
+    display: flex; gap: 1rem;
+    align-items: flex-start;
+    transition: border-color .3s, transform .3s;
+  }
+  .edu-card:hover { border-color: rgba(56,189,248,0.3); transform: translateY(-3px); }
+  .edu-icon {
+    font-size: 1.4rem;
+    width: 44px; height: 44px;
+    background: var(--glow);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .edu-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .edu-inst { font-size: 0.82rem; color: var(--accent2); font-weight: 500; margin-bottom: 3px; }
+  .edu-period { font-size: 0.75rem; color: var(--text3); }
+
+  /* ─── CONTACT ─── */
+  #contact {}
+
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-text p {
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 12px;
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 12px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: all .2s;
+    font-weight: 400;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--text); background: var(--card2); }
+  .contact-link-icon { font-size: 1rem; width: 28px; text-align: center; }
+  .contact-link-label { font-size: 0.7rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+
+  .contact-form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 2rem;
+  }
+  .form-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.3px;
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color .2s;
+    resize: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { height: 110px; }
+  .form-submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #080E1A;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity .2s, transform .2s;
+    letter-spacing: 0.3px;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { opacity: .9; transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 5vw;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-size: 0.82rem; color: var(--text3); }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* ─── MOBILE MENU ─── */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0;
+    background: rgba(8,14,26,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 5vw 2rem;
+    z-index: 999;
+    gap: 1.2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color .2s;
+  }
+  .mobile-menu a:hover { color: var(--accent); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-card { position: static; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    nav .nav-links, nav .nav-icons { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 70px 5vw; }
+    .hero-name { letter-spacing: -1px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">port<span>.</span>fólio</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav-about">Sobre mim</a></li>
+    <li><a href="#skills" data-i18n="nav-skills">Habilidades</a></li>
+    <li><a href="#projects" data-i18n="nav-projects">Projetos</a></li>
+    <li><a href="#experience" data-i18n="nav-exp">Experiência</a></li>
+    <li><a href="#education" data-i18n="nav-edu">Formação</a></li>
+    <li><a href="#contact" data-i18n="nav-contact">Contato</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-icons" style="display:flex;gap:1.2rem;">
+      <a href="https://www.linkedin.com/in/izianesantana/?skipRedirect=true" target="_blank" title="LinkedIn">in</a>
+      <a href="https://github.com/izisantana" target="_blank" title="GitHub">gh</a>
+      <a href="mailto:izianesf@gmail.com" title="Email">✉</a>
+    </div>
+    <button class="lang-btn" onclick="toggleLang()">EN</button>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" data-i18n="nav-about" onclick="toggleMenu()">Sobre mim</a>
+  <a href="#skills" data-i18n="nav-skills" onclick="toggleMenu()">Habilidades</a>
+  <a href="#projects" data-i18n="nav-projects" onclick="toggleMenu()">Projetos</a>
+  <a href="#experience" data-i18n="nav-exp" onclick="toggleMenu()">Experiência</a>
+  <a href="#education" data-i18n="nav-edu" onclick="toggleMenu()">Formação</a>
+  <a href="#contact" data-i18n="nav-contact" onclick="toggleMenu()">Contato</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+
+    <h1 class="hero-name">
+      <span class="line1" data-i18n="hero-name1">Iziane Santana</span><br/>
+      <span class="line2" data-i18n="hero-name2">Dados & Business Intelligence</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero-sub">
+      Analista em transição para tecnologia, com foco em análise de dados, business intelligence e desenvolvimento de soluções digitais. Possuo conhecimentos em Python e SQL e busco me aprofundar ainda mais na gestão de negócios e projetos para fornecer insights assertivos e soluções estratégicas.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary" data-i18n="hero-btn1">Ver projetos</a>
+      <a href="#contact" class="btn-outline" data-i18n="hero-btn2">Entrar em contato</a>
+    </div>
+  </div>
+</section>
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-i18n="about-label">Quem sou</div>
+      <h2 class="section-title" data-i18n="about-title">Sobre mim</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-i18n="about-p1">Sou graduada em Engenharia Biomédica pela UFPE e pós-graduada em Data Science. Tenho experiência em vendas consultivas, análise comercial e relacionamento com clientes, e atualmente estou em transição para a área de tecnologia, construindo um portfólio voltado a oportunidades em análise de dados, BI, automação, inteligência artificial e desenvolvimento.</p>
+        <p data-i18n="about-p2">Ao longo da minha carreira, percebi a importância da estruturação de dados para apoiar decisões de negócio. Essa vivência despertou meu interesse em aprofundar conhecimentos em Python, SQL, Machine Learning e automações com IA. Embora minha atuação profissional tenha sido concentrada na área comercial, tive contato direto com projetos que aplicam tecnologia a problemas reais.</p>
+        <p data-i18n="about-p3">Durante minha última experiência profissional, participei de iniciativas envolvendo dashboards em Power BI, análise de funil de vendas, integração de CRM para automação de pedidos de venda e aprimoramento de soluções com IA, incluindo um agente para centralizar interações com leads. Também contribuí em um projeto relacionado ao processamento de sinais de EEG, extração de características e aplicação de modelos de classificação.</p>
+        <p data-i18n="about-p4">Hoje, busco combinar visão de negócio, pensamento analítico e habilidades técnicas para construir soluções orientadas por dados, melhorar processos e gerar impacto real por meio da tecnologia.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-title" data-i18n="about-card-title">Resumo rápido</div>
+        <div class="about-info-row">
+          <div class="about-info-icon">📍</div>
+          <div>
+            <div class="about-info-label" data-i18n="about-loc-label">Localização</div>
+            <div class="about-info-val" data-i18n="about-loc-val">Recife, Brasil</div>
+          </div>
+        </div>
+        <div class="about-info-row">
+          <div class="about-info-icon">💼</div>
+          <div>
+            <div class="about-info-label" data-i18n="about-area-label">Área</div>
+            <div class="about-info-val" data-i18n="about-area-val">Negócios, Análise e Engenharia de Dados, BI e IA</div>
+          </div>
+        </div>
+        <div class="about-info-row">
+          <div class="about-info-icon">🎯</div>
+          <div>
+            <div class="about-info-label" data-i18n="about-int-label">Interesses</div>
+            <div class="about-info-val" data-i18n="about-int-val">Análise e Engenharia de Dados, Agentes de IA, Desenvolvimento de Soluções Digitais</div>
+          </div>
+        </div>
+        <div class="about-info-row">
+          <div class="about-info-icon">🌐</div>
+          <div>
+            <div class="about-info-label" data-i18n="about-lang-label">Idiomas</div>
+            <div class="about-info-val" data-i18n="about-lang-val">Português, Inglês</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-i18n="skills-label">Tecnologias</div>
+      <h2 class="section-title" data-i18n="skills-title">Habilidades</h2>
+      <p class="section-desc" data-i18n="skills-desc">Ferramentas e tecnologias que uso para construir soluções de dados e automação.</p>
+    </div>
+    <div class="skills-cats">
+      <div class="skill-cat">
+        <div class="skill-cat-label"><span class="skill-cat-icon">🐍</span> <span data-i18n="sk1">Programming & Data</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Data Cleaning</span>
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label"><span class="skill-cat-icon">📊</span> <span data-i18n="sk2">BI & Visualization</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Dashboards</span>
+          <span class="skill-tag">Data Storytelling</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label"><span class="skill-cat-icon">🤖</span> <span data-i18n="sk3">AI & Automação</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">OpenAI</span>
+          <span class="skill-tag">N8N</span>
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">AI Agents</span>
+          <span class="skill-tag">Workflow Automation</span>
+          <span class="skill-tag">Redis</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-label"><span class="skill-cat-icon">🛠️</span> <span data-i18n="sk5">Tools & Dev</span></div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">Google Colab</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">SQLite</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-i18n="proj-label">Portifólio</div>
+      <h2 class="section-title" data-i18n="proj-title">Projetos</h2>
+      <p class="section-desc" data-i18n="proj-desc">Soluções construídas com dados, análise, IA e automação.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Card 1 -->
+      <div class="project-card" data-cat="bi">
+        <div class="project-thumb">
+          <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(56,189,248,0.3),transparent)"></div>
+          <div class="project-thumb-icon">📊</div>
+        </div>
+        <div class="project-body">
+          <span class="project-cat-tag cat-bi">BI Dashboard</span>
+          <div class="project-name" data-i18n="p1-name">Dashboard Comercial — Power BI</div>
+          <p class="project-desc" data-i18n="p1-desc">Painel de vendas com KPIs de performance, análise por região e acompanhamento de metas mensais e trimestrais.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Power BI</span>
+            <span class="tech-tag">DAX</span>
+            <span class="tech-tag">Excel</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-btn primary" data-i18n="btn-gh">GitHub</a>
+            <a href="#" class="proj-btn" data-i18n="btn-demo">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card" data-cat="sql">
+        <div class="project-thumb">
+          <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(45,212,191,0.3),transparent)"></div>
+          <div class="project-thumb-icon">🗄️</div>
+        </div>
+        <div class="project-body">
+          <span class="project-cat-tag cat-sql">SQL</span>
+          <div class="project-name" data-i18n="p2-name">Análise de Dados — SQL</div>
+          <p class="project-desc" data-i18n="p2-desc">Exploração e análise de base de dados musical com consultas avançadas, subqueries e criação de views para relatórios.</p>
+          <div class="project-tech">
+            <span class="tech-tag">SQLite</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">SQL Avançado</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-btn primary" data-i18n="btn-gh">GitHub</a>
+            <a href="#" class="proj-btn" data-i18n="btn-case">Case</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card" data-cat="ml">
+        <div class="project-thumb">
+          <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(167,139,250,0.3),transparent)"></div>
+          <div class="project-thumb-icon">🧠</div>
+        </div>
+        <div class="project-body">
+          <span class="project-cat-tag cat-ml">Machine Learning</span>
+          <div class="project-name" data-i18n="p3-name">Classificação de Sinais EEG</div>
+          <p class="project-desc" data-i18n="p3-desc">Projeto de pesquisa aplicando ML para classificação de estados cognitivos a partir de sinais cerebrais (EEG).</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">MNE</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-btn primary" data-i18n="btn-gh">GitHub</a>
+            <a href="#" class="proj-btn" data-i18n="btn-case">Case</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="project-card" data-cat="ai">
+        <div class="project-thumb">
+          <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(244,114,182,0.3),transparent)"></div>
+          <div class="project-thumb-icon">🤖</div>
+        </div>
+        <div class="project-body">
+          <span class="project-cat-tag cat-ai">IA / Automação</span>
+          <div class="project-name" data-i18n="p4-name">Agente de IA para Atendimento</div>
+          <p class="project-desc" data-i18n="p4-desc">Automação de fluxo de atendimento com agente de IA integrado ao WhatsApp, com memória contextual via Redis e OpenAI.</p>
+          <div class="project-tech">
+            <span class="tech-tag">N8N</span>
+            <span class="tech-tag">OpenAI</span>
+            <span class="tech-tag">Redis</span>
+            <span class="tech-tag">WhatsApp API</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-btn primary" data-i18n="btn-gh">GitHub</a>
+            <a href="#" class="proj-btn" data-i18n="btn-demo">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="project-card" data-cat="python">
+        <div class="project-thumb">
+          <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(251,191,36,0.25),transparent)"></div>
+          <div class="project-thumb-icon">🌐</div>
+        </div>
+        <div class="project-body">
+          <span class="project-cat-tag cat-py">Python / App</span>
+          <div class="project-name" data-i18n="p5-name">App de Análise — Streamlit</div>
+          <p class="project-desc" data-i18n="p5-desc">Aplicação web interativa para exploração e visualização de dados com filtros dinâmicos, gráficos e exportação de relatórios.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Streamlit</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Plotly</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-btn primary" data-i18n="btn-gh">GitHub</a>
+            <a href="#" class="proj-btn" data-i18n="btn-demo">Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="project-card" data-cat="bi python">
+        <div class="project-thumb">
+          <div class="project-thumb-bg" style="background:linear-gradient(135deg,rgba(56,189,248,0.2),rgba(167,139,250,0.2))"></div>
+          <div class="project-thumb-icon">📈</div>
+        </div>
+        <div class="project-body">
+          <span class="project-cat-tag cat-bi">BI + Python</span>
+          <div class="project-name" data-i18n="p6-name">Análise Comercial Integrada</div>
+          <p class="project-desc" data-i18n="p6-desc">Pipeline de dados integrando extração com Python, transformação com Pandas e visualização final em Power BI.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Power BI</span>
+            <span class="tech-tag">SQL</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-btn primary" data-i18n="btn-gh">GitHub</a>
+            <a href="#" class="proj-btn" data-i18n="btn-case">Case</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /projects-grid -->
+
+    <!-- Paginação -->
+    <div class="pagination" id="pagination">
+      <button class="page-btn" id="prev-page" onclick="changePage(-1)" disabled>&#8592;</button>
+      <div class="page-indicator" id="page-indicator"><span id="cur-page">1</span> / <span id="total-pages">1</span></div>
+      <button class="page-btn" id="next-page" onclick="changePage(1)">&#8594;</button>
+    </div>
+
+  </div>
+</section>
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-i18n="exp-label">Trajetória</div>
+      <h2 class="section-title" data-i18n="exp-title">Experiência</h2>
+    </div>
+    <div class="timeline">
+
+      <!-- Neurobots -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Sales Development Representative</div>
+            <div class="tl-period">07/2022 – Atual</div>
+          </div>
+          <div class="tl-company">Neurobots</div>
+          <ul class="tl-list">
+            <li>Elaboração de visualizações em Power BI, criando dashboards interativos para consumidores finais.</li>
+            <li>Suporte na análise de métricas de desempenho comercial, incluindo relatórios detalhados em BI e Excel.</li>
+            <li>Automatização e acompanhamento de campanhas de marketing, integrando sistemas de CRM e realizando testes A/B.</li>
+            <li>Criação de relatórios de benchmarking, análise de KPIs e acompanhamento de indicadores de performance comercial.</li>
+            <li>Garantir a performance dos canais de pré-qualificação, propondo e executando soluções para melhorar as etapas do funil de vendas e CRM.</li>
+            <li>Estabelecer e manter relacionamentos com leads, colaborando para a aquisição do cliente.</li>
+            <li>Contribuição como voluntária interna FACEPE no projeto "ANGATU-UFPE: Inteligência Computacional e Ciência de Dados" — processamento de sinais EEG, técnicas de filtragem, extração de características e modelos de classificação para interfaces cérebro-computador.</li>
+            <li>Elaboração e aprimoramentos em Agente de IA que centraliza interações de leads no Instagram e WhatsApp usando N8N, Redis e OpenAI — automatizando respostas, organizando dados e agendando reuniões.</li>
+          </ul>
+          <div class="tl-tools">
+            <span class="tool-tag">Power BI</span>
+            <span class="tool-tag">Excel</span>
+            <span class="tool-tag">CRM</span>
+            <span class="tool-tag">N8N</span>
+            <span class="tool-tag">OpenAI</span>
+            <span class="tool-tag">Redis</span>
+            <span class="tool-tag">Python</span>
+            <span class="tool-tag">Scikit-learn</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analista de Engenharia -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Analista de Engenharia</div>
+            <div class="tl-period">02/2022 – 07/2022</div>
+          </div>
+          <div class="tl-company">EBEM / TECSAÚDE</div>
+          <ul class="tl-list">
+            <li>Implementação de bancos de dados para armazenamento e consulta de informações sobre equipamentos médicos e ordens de serviço.</li>
+            <li>Levantamento de requisitos e elaboração de relatórios para apoiar decisões estratégicas, utilizando ferramentas de BI para acompanhamento de performance.</li>
+          </ul>
+          <div class="tl-tools">
+            <span class="tool-tag">Banco de Dados</span>
+            <span class="tool-tag">BI</span>
+            <span class="tool-tag">Relatórios</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assistente Comercial -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Assistente Comercial</div>
+            <div class="tl-period">08/2021 – 01/2022</div>
+          </div>
+          <div class="tl-company">EBEM / TECSAÚDE</div>
+          <ul class="tl-list">
+            <li>Elaboração de propostas técnicas e comerciais, integrando dados coletados em planilhas e sistemas internos.</li>
+            <li>Análise de contratos e propostas, utilizando planilhas para controle de custos e desempenho.</li>
+            <li>Acompanhamento e participação em licitações.</li>
+            <li>Criação e atualização de oportunidades no CRM (Pipedrive).</li>
+            <li>Atualização de base de dados no Power BI.</li>
+          </ul>
+          <div class="tl-tools">
+            <span class="tool-tag">Excel</span>
+            <span class="tool-tag">Power BI</span>
+            <span class="tool-tag">Pipedrive</span>
+            <span class="tool-tag">Licitações</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estagiária -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-top">
+            <div class="tl-role">Estagiária de Engenharia Clínica</div>
+            <div class="tl-period">06/2020 – 08/2021</div>
+          </div>
+          <div class="tl-company">EBEM / TECSAÚDE</div>
+          <ul class="tl-list">
+            <li>Apoio à equipe na realização de manutenções corretivas e programadas, acompanhando os indicadores para cumprimento de metas.</li>
+            <li>Acompanhamento semanal das ordens de serviço, planos de manutenção e protocolos de entrada e saída de equipamentos médicos, com atualizações no sistema Neovero.</li>
+          </ul>
+          <div class="tl-tools">
+            <span class="tool-tag">Neovero</span>
+            <span class="tool-tag">Manutenção</span>
+            <span class="tool-tag">Indicadores</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-i18n="edu-label">Formação</div>
+      <h2 class="section-title" data-i18n="edu-title">Educação</h2>
+    </div>
+
+    <!-- Grau acadêmico -->
+    <div class="edu-grid" style="margin-bottom: 3rem;">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-title">Pós-Graduação em Data Science</div>
+          <div class="edu-inst">UniAmérica Centro Universitário + Descomplica</div>
+          <div class="edu-period">2025</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">🔬</div>
+        <div>
+          <div class="edu-title">Bacharelado em Engenharia Biomédica</div>
+          <div class="edu-inst">Universidade Federal de Pernambuco (UFPE)</div>
+          <div class="edu-period">2022</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Destaques acadêmicos -->
+    <div style="margin-bottom: 3rem;">
+      <div class="section-label" style="margin-bottom: 1.5rem;" data-i18n="edu-highlights-label">Destaques Acadêmicos</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+
+        <div class="edu-card" style="align-items: flex-start;">
+          <div class="edu-icon">🔬</div>
+          <div>
+            <div class="edu-title">Iniciação Científica</div>
+            <div class="edu-inst">Departamento de Engenharia Biomédica, UFPE</div>
+            <div class="edu-period">2017 – 2018</div>
+            <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;font-weight:300;line-height:1.5;">Atuação no protocolo e execução de testes de usabilidade e desenvolvimento de ferramentas.</p>
+          </div>
+        </div>
+
+        <div class="edu-card" style="align-items: flex-start;">
+          <div class="edu-icon">🧪</div>
+          <div>
+            <div class="edu-title">Projeto de Extensão</div>
+            <div class="edu-inst">Voxar Labs, UFPE</div>
+            <div class="edu-period">2018 – 2019</div>
+            <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;font-weight:300;line-height:1.5;">Alterações no código (C++) da ferramenta ARkanoidAR e testes de usabilidade com usuários saudáveis e pacientes.</p>
+          </div>
+        </div>
+
+        <div class="edu-card" style="align-items: flex-start;">
+          <div class="edu-icon">🏆</div>
+          <div>
+            <div class="edu-title">Prêmio — Camp de Inovação</div>
+            <div class="edu-inst">XXVI Congresso Brasileiro de Engenharia Biomédica</div>
+            <div class="edu-period">—</div>
+            <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;font-weight:300;line-height:1.5;">Projeto Sicure.</p>
+          </div>
+        </div>
+
+        <div class="edu-card" style="align-items: flex-start;">
+          <div class="edu-icon">🏢</div>
+          <div>
+            <div class="edu-title">Biotech Consultoria</div>
+            <div class="edu-inst">UFPE</div>
+            <div class="edu-period">—</div>
+            <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;font-weight:300;line-height:1.5;">Idealização e fundação da primeira empresa júnior do Brasil com atuação em Engenharia Biomédica.</p>
+          </div>
+        </div>
+
+        <div class="edu-card" style="align-items: flex-start;">
+          <div class="edu-icon">🤝</div>
+          <div>
+            <div class="edu-title">Liga Acadêmica de Engenharia de Reabilitação</div>
+            <div class="edu-inst">UFPE</div>
+            <div class="edu-period">—</div>
+            <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;font-weight:300;line-height:1.5;">Idealização e fundação da liga na UFPE para alunos de Fisioterapia, Terapia Ocupacional e Engenharia Biomédica.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Publicações -->
+    <div>
+      <div class="section-label" style="margin-bottom: 1.5rem;" data-i18n="edu-pubs-label">Contribuições Acadêmicas</div>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;">
+          <p style="font-size:0.84rem;color:var(--text2);font-weight:300;line-height:1.6;">
+            <span style="color:var(--accent2);font-weight:500;">Vinicius de Sousa Vilela; Maria I. de Santana</span> et al. <em>Improving Therapeutic Exercises Possibilities Through a Configurable Augmented Reality Motor Rehabilitation Application.</em> XI SIMPÓSIO BRASILEIRO DE JOGOS E ENTRETENIMENTO DIGITAL, v. 9, p. 960-968, 2020.
+          </p>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;">
+          <p style="font-size:0.84rem;color:var(--text2);font-weight:300;line-height:1.6;">
+            <span style="color:var(--accent2);font-weight:500;">Virgínia Carrazzone Cavalcanti, Maria Iziane de Santana Ferreira</span> et al. <em>Usability and effects of text, image and audio feedback on exercise correction during augmented reality based motor rehabilitation.</em> Computers & Graphics, Volume 85, 2019, Pages 100-110. <a href="https://doi.org/10.1016/j.cag.2019.10.001" target="_blank" style="color:var(--accent);text-decoration:none;">doi:10.1016/j.cag.2019.10.001</a>
+          </p>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;">
+          <p style="font-size:0.84rem;color:var(--text2);font-weight:300;line-height:1.6;">
+            <span style="color:var(--accent2);font-weight:500;">Cavalcanti, Virginia; Santana, Maria</span> et al. <em>Usability Assessments for Augmented Reality Motor Rehabilitation Solutions: A Systematic Review.</em> International Journal of Computer Games Technology, 2018, 1-18. <a href="https://doi.org/10.1155/2018/5387896" target="_blank" style="color:var(--accent);text-decoration:none;">doi:10.1155/2018/5387896</a>
+          </p>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;">
+          <p style="font-size:0.84rem;color:var(--text2);font-weight:300;line-height:1.6;">
+            <span style="color:var(--accent2);font-weight:500;">Maria I. de Santana; Cavalcanti, Virgínia C.</span> et al. <em>ARkanoidAR 2.0: Otimizações em uma solução de realidade aumentada com base em testes de usabilidade.</em> 2018.
+          </p>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;">
+          <p style="font-size:0.84rem;color:var(--text2);font-weight:300;line-height:1.6;">
+            <span style="color:var(--accent2);font-weight:500;">Maria I. de Santana; Nunes, I. B.; Da Gama, A. E. F.</span> <em>Fatores que Influenciam a Adesão de Pacientes à Reabilitação Motora e o Papel da Engenharia de Reabilitação.</em> 2018.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label" data-i18n="contact-label">Vamos conversar</div>
+      <h2 class="section-title" data-i18n="contact-title">Contato</h2>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-text">
+        <p data-i18n="contact-p">Estou aberta a oportunidades, projetos freelance e networking. Se você tem uma ideia, uma vaga ou só quer trocar uma ideia sobre dados e tecnologia, me manda uma mensagem!</p>
+        <div class="contact-links">
+          <a href="mailto:izianesf@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉</span>
+            <div>
+              <div class="contact-link-label">Email</div>
+              <div>izianesf@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/izianesantana/?skipRedirect=true" target="_blank" class="contact-link">
+            <span class="contact-link-icon">in</span>
+            <div>
+              <div class="contact-link-label">LinkedIn</div>
+              <div>linkedin.com/in/izianesantana</div>
+            </div>
+          </a>
+          <a href="https://github.com/izisantana" target="_blank" class="contact-link">
+            <span class="contact-link-icon">⌥</span>
+            <div>
+              <div class="contact-link-label">GitHub</div>
+              <div>github.com/izisantana</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <div class="form-title" data-i18n="form-title">Envie uma mensagem</div>
+        <div class="form-group">
+          <label data-i18n="form-name">Nome</label>
+          <input type="text" id="contact-name" placeholder="Seu nome"/>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form-email">Email</label>
+          <input type="email" id="contact-email" placeholder="seu@email.com"/>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form-msg">Mensagem</label>
+          <textarea id="contact-msg" placeholder="Oi! Gostaria de..."></textarea>
+        </div>
+        <button class="form-submit" onclick="sendEmail()" data-i18n="form-send">Enviar mensagem →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p data-i18n="footer-copy">© 2025 · Feito com 💙 por <a href="#">Iziane</a></p>
+  <p data-i18n="footer-tech">Portfólio de Dados, BI & IA</p>
+</footer>
+
+<script>
+/* ─── i18n ─── */
+const translations = {
+  pt: {
+    "nav-about":"Sobre mim","nav-skills":"Habilidades","nav-projects":"Projetos",
+    "nav-exp":"Experiência","nav-edu":"Formação","nav-contact":"Contato",
+    "hero-badge":"Disponível para oportunidades",
+    "hero-name1":"Iziane Santana","hero-name2":"Dados & Business Intelligence",
+    "hero-sub":"Analista em transição para tecnologia, com foco em análise de dados, business intelligence e desenvolvimento de soluções digitais. Possuo conhecimentos em Python e SQL e busco me aprofundar ainda mais na gestão de negócios e projetos para fornecer insights assertivos e soluções estratégicas.",
+    "hero-btn1":"Ver projetos","hero-btn2":"Entrar em contato",
+    "about-label":"Quem sou","about-title":"Sobre mim",
+    "about-p1":"Sou graduada em Engenharia Biomédica pela UFPE e pós-graduada em Data Science. Tenho experiência em vendas consultivas, análise comercial e relacionamento com clientes, e atualmente estou em transição para a área de tecnologia, construindo um portfólio voltado a oportunidades em análise de dados, BI, automação, inteligência artificial e desenvolvimento.",
+    "about-p2":"Ao longo da minha carreira, percebi a importância da estruturação de dados para apoiar decisões de negócio. Essa vivência despertou meu interesse em aprofundar conhecimentos em Python, SQL, Machine Learning e automações com IA. Embora minha atuação profissional tenha sido concentrada na área comercial, tive contato direto com projetos que aplicam tecnologia a problemas reais.",
+    "about-p3":"Durante minha última experiência profissional, participei de iniciativas envolvendo dashboards em Power BI, análise de funil de vendas, integração de CRM para automação de pedidos de venda e aprimoramento de soluções com IA, incluindo um agente para centralizar interações com leads. Também contribuí em um projeto relacionado ao processamento de sinais de EEG, extração de características e aplicação de modelos de classificação.",
+    "about-p4":"Hoje, busco combinar visão de negócio, pensamento analítico e habilidades técnicas para construir soluções orientadas por dados, melhorar processos e gerar impacto real por meio da tecnologia.",
+    "about-card-title":"Resumo rápido",
+    "about-loc-label":"Localização","about-loc-val":"Recife, Brasil",
+    "about-area-label":"Área","about-area-val":"Negócios, Análise e Engenharia de Dados, BI e IA",
+    "about-int-label":"Interesses","about-int-val":"Análise e Engenharia de Dados, Agentes de IA, Desenvolvimento de Soluções Digitais",
+    "about-lang-label":"Idiomas","about-lang-val":"Português, Inglês",
+    "about-status":"Aberta a oportunidades",
+    "skills-label":"Tecnologias","skills-title":"Habilidades",
+    "skills-desc":"Ferramentas e tecnologias que uso para construir soluções de dados e automação.",
+    "sk1":"Programming & Data","sk2":"BI & Visualization","sk3":"AI & Automação","sk4":"Machine Learning","sk5":"Tools & Dev",
+    "proj-label":"Portifólio","proj-title":"Projetos","proj-desc":"Soluções construídas com dados, análise, IA e automação.",
+    "f-all":"Todos","f-ai":"IA/Automação",
+    "p1-name":"Dashboard Comercial — Power BI","p1-desc":"Painel de vendas com KPIs de performance, análise por região e acompanhamento de metas mensais e trimestrais.",
+    "p2-name":"Análise de Dados — SQL","p2-desc":"Exploração e análise de base de dados musical com consultas avançadas, subqueries e criação de views para relatórios.",
+    "p3-name":"Classificação de Sinais EEG","p3-desc":"Projeto de pesquisa aplicando ML para classificação de estados cognitivos a partir de sinais cerebrais (EEG).",
+    "p4-name":"Agente de IA para Atendimento","p4-desc":"Automação de fluxo de atendimento com agente de IA integrado ao WhatsApp, com memória contextual via Redis e OpenAI.",
+    "p5-name":"App de Análise — Streamlit","p5-desc":"Aplicação web interativa para exploração e visualização de dados com filtros dinâmicos, gráficos e exportação de relatórios.",
+    "p6-name":"Análise Comercial Integrada","p6-desc":"Pipeline de dados integrando extração com Python, transformação com Pandas e visualização final em Power BI.",
+    "btn-gh":"GitHub","btn-demo":"Demo","btn-case":"Case",
+    "exp-label":"Trajetória","exp-title":"Experiência",
+    "exp1-role":"Analista / Automação & IA","exp1-period":"2024 – Presente","exp1-company":"Projetos próprios & Freelance",
+    "exp1-li1":"Desenvolvimento de agentes de IA para automação de atendimento",
+    "exp1-li2":"Criação de dashboards e pipelines de dados",
+    "exp1-li3":"Projetos de machine learning e análise de dados",
+    "exp1-li4":"Participação em projeto de pesquisa com sinais EEG e ML",
+    "exp2-role":"Vendas Consultivas & Análise Comercial","exp2-period":"2020 – 2024","exp2-company":"Empresa Anterior",
+    "exp2-li1":"Gestão de carteira de clientes com foco em relacionamento e resultado",
+    "exp2-li2":"Uso de CRM e dashboards para acompanhamento de indicadores",
+    "exp2-li3":"Análise de dados comerciais para embasar estratégias de venda",
+    "exp2-li4":"Automação de relatórios e processos internos com Excel avançado",
+    "exp3-role":"Atendimento & Suporte ao Cliente","exp3-period":"2017 – 2020","exp3-company":"Empresa Anterior",
+    "exp3-li1":"Resolução de problemas complexos com foco em satisfação do cliente",
+    "exp3-li2":"Levantamento de dados e elaboração de relatórios de performance",
+    "exp3-li3":"Identificação de padrões para melhoria de processos",
+    "edu-label":"Formação","edu-title":"Educação",
+    "edu1-title":"Graduação em Administração / Área afim","edu1-inst":"Universidade","edu1-period":"20XX – 20XX",
+    "edu2-title":"Formação em Data Science & BI","edu2-inst":"Plataforma de cursos","edu2-period":"2023 – 2024",
+    "edu3-title":"Python para Análise de Dados","edu3-inst":"Curso / Certificação","edu3-period":"2023",
+    "edu4-title":"Machine Learning & IA","edu4-inst":"Curso / Certificação","edu4-period":"2024",
+    "edu5-title":"Power BI — Do Básico ao Avançado","edu5-inst":"Curso / Certificação","edu5-period":"2023",
+    "edu6-title":"SQL & Bancos de Dados","edu6-inst":"Curso / Certificação","edu6-period":"2023",
+    "contact-label":"Vamos conversar","contact-title":"Contato",
+    "contact-p":"Estou aberta a oportunidades, projetos freelance e networking. Se você tem uma ideia, uma vaga ou só quer trocar uma ideia sobre dados e tecnologia, me manda uma mensagem!",
+    "form-title":"Envie uma mensagem","form-name":"Nome","form-email":"Email","form-msg":"Mensagem","form-send":"Enviar mensagem →",
+    "footer-copy":"© 2025 · Feito com 💙 por Iziane","footer-tech":"Portfólio de Dados, BI & IA"
+  },
+  en: {
+    "nav-about":"About","nav-skills":"Skills","nav-projects":"Projects",
+    "nav-exp":"Experience","nav-edu":"Education","nav-contact":"Contact",
+    "hero-badge":"Open to opportunities",
+    "hero-name1":"Iziane Santana","hero-name2":"Data & Business Intelligence",
+    "hero-sub":"Analyst transitioning to tech, focused on data analysis, business intelligence, and digital solution development. I have knowledge in Python and SQL and aim to deepen my expertise in business and project management to deliver assertive insights and strategic solutions.",
+    "hero-btn1":"View projects","hero-btn2":"Get in touch",
+    "about-label":"Who I am","about-title":"About me",
+    "about-p1":"I hold a degree in Biomedical Engineering from UFPE and a postgraduate degree in Data Science. I have experience in consultative sales, commercial analysis, and customer relationships, and I'm currently transitioning into tech, building a portfolio focused on opportunities in data analysis, BI, automation, artificial intelligence, and development.",
+    "about-p2":"Throughout my career, I realized the importance of structuring data to support business decisions. This experience sparked my interest in deepening my knowledge of Python, SQL, Machine Learning, and AI-powered automations. Although my professional background has been concentrated in the commercial area, I had direct exposure to projects that apply technology to real problems.",
+    "about-p3":"In my last professional role, I took part in initiatives involving Power BI dashboards, sales funnel analysis, CRM integration for automating sales orders, and the enhancement of AI solutions — including an agent to centralize lead interactions. I also contributed to a project related to EEG signal processing, feature extraction, and classification model application.",
+    "about-p4":"Today, I aim to combine business vision, analytical thinking, and technical skills to build data-driven solutions, improve processes, and generate real impact through technology.",
+    "about-card-title":"Quick summary",
+    "about-loc-label":"Location","about-loc-val":"Recife, Brazil",
+    "about-area-label":"Field","about-area-val":"Business, Data Analysis & Engineering, BI and AI",
+    "about-int-label":"Interests","about-int-val":"Data Analysis & Engineering, AI Agents, Digital Solutions Development",
+    "about-lang-label":"Languages","about-lang-val":"Portuguese, English",
+    "about-status":"Open to opportunities",
+    "skills-label":"Technologies","skills-title":"Skills",
+    "skills-desc":"Tools and technologies I use to build data and automation solutions.",
+    "sk1":"Programming & Data","sk2":"BI & Visualization","sk3":"AI & Automation","sk4":"Machine Learning","sk5":"Tools & Dev",
+    "proj-label":"Portfolio","proj-title":"Projects","proj-desc":"Solutions built with data, analysis, AI, and automation.",
+    "f-all":"All","f-ai":"AI/Automation",
+    "p1-name":"Sales Dashboard — Power BI","p1-desc":"Sales panel with performance KPIs, regional analysis, and monthly and quarterly target tracking.",
+    "p2-name":"Data Analysis — SQL","p2-desc":"Exploration and analysis of a music database using advanced queries, subqueries, and views for reporting.",
+    "p3-name":"EEG Signal Classification","p3-desc":"Research project applying ML to classify cognitive states from brain signals (EEG).",
+    "p4-name":"AI Customer Service Agent","p4-desc":"Customer service flow automation with an AI agent integrated into WhatsApp, using contextual memory via Redis and OpenAI.",
+    "p5-name":"Analysis App — Streamlit","p5-desc":"Interactive web application for data exploration and visualization with dynamic filters, charts, and report export.",
+    "p6-name":"Integrated Sales Analytics","p6-desc":"Data pipeline integrating extraction with Python, transformation with Pandas, and final visualization in Power BI.",
+    "btn-gh":"GitHub","btn-demo":"Demo","btn-case":"Case study",
+    "exp-label":"Journey","exp-title":"Experience",
+    "exp1-role":"Analyst / Automation & AI","exp1-period":"2024 – Present","exp1-company":"Personal projects & Freelance",
+    "exp1-li1":"Developed AI agents for customer service automation",
+    "exp1-li2":"Built dashboards and data pipelines",
+    "exp1-li3":"Machine learning and data analysis projects",
+    "exp1-li4":"Participated in EEG signal research project with ML",
+    "exp2-role":"Consultative Sales & Commercial Analysis","exp2-period":"2020 – 2024","exp2-company":"Previous Company",
+    "exp2-li1":"Managed client portfolio with focus on relationships and results",
+    "exp2-li2":"Used CRM and dashboards to track performance indicators",
+    "exp2-li3":"Analyzed commercial data to support sales strategies",
+    "exp2-li4":"Automated reports and internal processes with advanced Excel",
+    "exp3-role":"Customer Support & Service","exp3-period":"2017 – 2020","exp3-company":"Previous Company",
+    "exp3-li1":"Resolved complex issues with focus on customer satisfaction",
+    "exp3-li2":"Collected data and prepared performance reports",
+    "exp3-li3":"Identified patterns to improve internal processes",
+    "edu-label":"Background","edu-title":"Education",
+    "edu1-title":"Bachelor's in Business / Related field","edu1-inst":"University","edu1-period":"20XX – 20XX",
+    "edu2-title":"Data Science & BI Program","edu2-inst":"Online platform","edu2-period":"2023 – 2024",
+    "edu3-title":"Python for Data Analysis","edu3-inst":"Course / Certification","edu3-period":"2023",
+    "edu4-title":"Machine Learning & AI","edu4-inst":"Course / Certification","edu4-period":"2024",
+    "edu5-title":"Power BI — Beginner to Advanced","edu5-inst":"Course / Certification","edu5-period":"2023",
+    "edu6-title":"SQL & Databases","edu6-inst":"Course / Certification","edu6-period":"2023",
+    "contact-label":"Let's talk","contact-title":"Contact",
+    "contact-p":"I'm open to opportunities, freelance projects, and networking. If you have an idea, a role, or just want to chat about data and technology — send me a message!",
+    "form-title":"Send a message","form-name":"Name","form-email":"Email","form-msg":"Message","form-send":"Send message →",
+    "footer-copy":"© 2025 · Made with 💙 by Iziane","footer-tech":"Data, BI & AI Portfolio"
+  }
+};
+
+let currentLang = 'pt';
+
+function applyLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) el.textContent = translations[lang][key];
+  });
+  document.querySelector('.lang-btn').textContent = lang === 'pt' ? 'EN' : 'PT';
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'pt' ? 'en' : 'pt';
+  applyLang(currentLang);
+}
+
+/* ─── NAV SCROLL ─── */
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ─── MOBILE MENU ─── */
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+/* ─── PAGINATION ─── */
+const CARDS_PER_PAGE = 6;
+let currentPage = 1;
+
+function getAllCards() {
+  return Array.from(document.querySelectorAll('.project-card'));
+}
+
+function getTotalPages() {
+  return Math.max(1, Math.ceil(getAllCards().length / CARDS_PER_PAGE));
+}
+
+function renderPage(page) {
+  const cards = getAllCards();
+  const total = getTotalPages();
+  currentPage = Math.max(1, Math.min(page, total));
+
+  cards.forEach((card, i) => {
+    const start = (currentPage - 1) * CARDS_PER_PAGE;
+    const end = start + CARDS_PER_PAGE;
+    const show = i >= start && i < end;
+    card.style.display = show ? '' : 'none';
+    if (show) {
+      setTimeout(() => card.classList.add('visible'), (i % CARDS_PER_PAGE) * 70);
+    }
+  });
+
+  document.getElementById('cur-page').textContent = currentPage;
+  document.getElementById('total-pages').textContent = total;
+  document.getElementById('prev-page').disabled = currentPage === 1;
+  document.getElementById('next-page').disabled = currentPage === total;
+
+  // Hide pagination if only 1 page
+  document.getElementById('pagination').style.display = total <= 1 ? 'none' : 'flex';
+}
+
+function changePage(dir) {
+  renderPage(currentPage + dir);
+  document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ─── EMAIL FORM ─── */
+function sendEmail() {
+  const name = document.getElementById('contact-name').value.trim();
+  const email = document.getElementById('contact-email').value.trim();
+  const msg = document.getElementById('contact-msg').value.trim();
+  if (!msg) { alert('Por favor, escreva uma mensagem.'); return; }
+  const subject = encodeURIComponent('Contato via Portifólio' + (name ? ' — ' + name : ''));
+  const body = encodeURIComponent((name ? 'Nome: ' + name + '\n' : '') + (email ? 'Email: ' + email + '\n\n' : '\n') + msg);
+  window.location.href = 'mailto:izianesf@gmail.com?subject=' + subject + '&body=' + body;
+}
+
+/* ─── INTERSECTION OBSERVER (scroll reveal) ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-cat, .project-card, .tl-item').forEach(el => observer.observe(el));
+
+/* ─── STAGGER for cards in same section ─── */
+document.querySelectorAll('.skill-cat').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 60}ms`;
+});
+document.querySelectorAll('.project-card').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 70}ms`;
+});
+
+// Init pagination
+renderPage(1);
+</script>
+</body>
+</html>
